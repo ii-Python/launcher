@@ -1,0 +1,5 @@
+# Hide logs
+logs/
+
+# Hide config
+launcher.json
