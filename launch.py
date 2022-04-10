@@ -16,7 +16,8 @@ if not os.path.isfile("launcher.json"):
     exit(color("[red]Error: no launcher.json file found to load service data from."))
 
 with open("launcher.json", "r") as f:
-    launch_data = json.loads(f.read())
+    launcher_config = json.loads(f.read())
+    launch_data = launcher_config["services"]
 
 root = os.path.dirname(__file__)
 log_dir = os.path.join(root, "logs")
@@ -132,6 +133,10 @@ def launch_app(args: list) -> None:
     if not os.path.isfile(log_path):
         with open(log_path, "w+") as file:
             file.write("")
+
+    for key in app:
+        for env, val in launcher_config["env"].items():
+            app[key] = app[key].replace(env, val)
 
     # Launch app
     Thread(
