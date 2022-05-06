@@ -91,7 +91,7 @@ class CLI(object):
 
     def stopall(self, args: list) -> None:
         st = datetime.now()
-        [self.stop(a["is"]) for a in launch_data]
+        [self.stop(a["id"]) for a in launch_data]
         exit(color(f"[green]* Stopped all services in [yellow]{round((datetime.now() - st).total_seconds(), 2)}s[/][/]"))
 
     def start(self, args: list) -> None:
@@ -139,6 +139,7 @@ def launch_app(args: list) -> None:
             app[key] = app[key].replace(env, val)
 
     # Launch app
+    app["command"] = f"IIPYTHONSERVICEID=\"{app['id']}\" {app['command']}"
     Thread(
         target = subprocess.run,
         args = [["sh", "-c", f"cd '{app['dir']}' && {app['command']}"]],
