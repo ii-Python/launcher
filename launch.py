@@ -59,6 +59,7 @@ class CLI(object):
 
     def ps(self, args: list) -> None:
         for p in launch_data:
+            p["command"] = f"IIPYTHONSERVICEID=\"{p['id']}\" {p['command']}"
             candidates = self.get_process_candidates(p)
             status = f"[green]Running - {str(candidates[0].pid)}[/]" if candidates else "[red]Halted[/]"
             print(f"* {p['name']} [{color(status)}]")
