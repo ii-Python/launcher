@@ -1,5 +1,7 @@
 # iiPython Service Launcher
 
+**Please note: this repository is no longer maintained; for an alternative, just use [systemd](https://www.freedesktop.org/wiki/Software/systemd/) or something similar.**
+
 ---
 
 ## Installation
